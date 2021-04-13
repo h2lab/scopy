@@ -16,6 +16,7 @@ class dummy(scope_base):
              }
 
     def __init__(self, args):
+        print(args)
         arg1 = None
         arg2 = None
         con = None     
@@ -36,8 +37,9 @@ class dummy(scope_base):
             arg2 = self.ifaces[con].get('pid') 
         else: 
             print(con,arg1,arg2)
-            raise AttributeError            
+            raise AttributeError   
         print("Dummy connection to:", con, arg1, arg2)
+        self.sample_size = args.get('sample_size') if args.get('sample_size') else 100
 
     def querry_id(self):
         return "DUMMY_SCOPE-000000042"
@@ -63,6 +65,6 @@ class dummy(scope_base):
             Numpy array of the last capture trace(s) or None (connection error)
         """
         # return the side channel leakage: here a vector of 100 float
-        return np.random.rand(100)   
+        return np.random.rand(self.sample_size)   
         
         
